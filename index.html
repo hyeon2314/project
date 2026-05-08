@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>하루 공부 계획표</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <p class="eyebrow">Exam Study Planner</p>
+        <h1 id="app-title">하루 공부 계획표</h1>
+        <p class="hero-description">
+          시험 과목과 남은 날짜를 입력하면 오늘부터 시험 전날까지 하루 공부량을 자동으로 나눠 드려요.
+        </p>
+      </section>
+
+      <section class="panel setup-panel" aria-labelledby="setup-title">
+        <div class="panel-header">
+          <div>
+            <p class="section-kicker">1단계</p>
+            <h2 id="setup-title">시험 정보 입력</h2>
+          </div>
+          <button id="reset-button" class="ghost-button" type="button">초기화</button>
+        </div>
+
+        <form id="planner-form" class="planner-form">
+          <label class="field-group">
+            <span>남은 날짜</span>
+            <input id="days-left" name="daysLeft" type="number" min="1" max="365" value="7" required />
+            <small>오늘 포함 공부할 수 있는 일수를 입력하세요.</small>
+          </label>
+
+          <div class="subject-section">
+            <div class="subject-section-header">
+              <div>
+                <span>시험 과목</span>
+                <small>과목별 공부량(단원/챕터/페이지 묶음)을 입력하세요.</small>
+              </div>
+              <button id="add-subject" class="secondary-button" type="button">과목 추가</button>
+            </div>
+            <div id="subjects-list" class="subjects-list" aria-live="polite"></div>
+          </div>
+
+          <button class="primary-button" type="submit">공부 계획 만들기</button>
+        </form>
+      </section>
+
+      <section class="dashboard-grid" aria-live="polite">
+        <article class="panel today-panel" aria-labelledby="today-title">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">오늘 할 일</p>
+              <h2 id="today-title"></h2>
+            </div>
+            <span id="today-progress" class="progress-pill">0%</span>
+          </div>
+          <div id="today-tasks" class="task-list empty-state">
+            아직 계획이 없어요. 시험 정보를 입력해 주세요.
+          </div>
+        </article>
+
+        <article class="panel overview-panel" aria-labelledby="overview-title">
+          <div class="panel-header">
+            <div>
+              <p class="section-kicker">전체 계획</p>
+              <h2 id="overview-title">일자별 공부량</h2>
+            </div>
+          </div>
+          <div id="schedule" class="schedule empty-state">
+            계획을 만들면 이곳에 날짜별 공부량이 표시됩니다.
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <template id="subject-row-template">
+      <div class="subject-row">
+        <label>
+          <span class="sr-only">과목명</span>
+          <input class="subject-name" type="text" placeholder="예: 수학" required />
+        </label>
+        <label>
+          <span class="sr-only">공부량</span>
+          <input class="subject-units" type="number" min="1" max="999" value="10" required />
+        </label>
+        <button class="icon-button remove-subject" type="button" aria-label="과목 삭제">×</button>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
